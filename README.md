@@ -15,4 +15,4 @@ Import the project into Unity and open the prefab brush by clicking Tools>Prefab
 FreePrefabPainter has been tested with Unity 2017.3.0b10.
 
 # Support + More information
---> See Unity forum
+https://forum.unity.com/threads/released-free-prefab-painter-github.506118/
