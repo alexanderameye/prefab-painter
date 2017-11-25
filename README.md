@@ -1,3 +1,4 @@
+
 # FreePrefabPainter
 A free, basic prefab paint for Unity3D.
 
@@ -5,7 +6,9 @@ A free, basic prefab paint for Unity3D.
 Import the project into Unity and open the prefab brush by clicking Tools>Prefab Brush.
 
 > ctrl + left mouse button to paint
+
 > ctrl + scroll to change the brush size
+
 > alt + scroll to change the brush density
 
 # Compatibility
