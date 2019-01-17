@@ -345,7 +345,14 @@ public class PrefabPainter : EditorWindow
     {
         if (currentEvent.control) HandleUtility.AddDefaultControl(GUIUtility.GetControlID(FocusType.Passive));
         RaycastHit hit;
-        Ray ray = sceneView.camera.ScreenPointToRay(new Vector2(currentEvent.mousePosition.x, sceneView.camera.pixelHeight - currentEvent.mousePosition.y));
+
+        Vector3 mousePos = currentEvent.mousePosition;
+        float ppp = EditorGUIUtility.pixelsPerPoint;
+        mousePos.y = sceneView.camera.pixelHeight - mousePos.y * ppp;
+        mousePos.x *= ppp;
+
+        Ray ray = sceneView.camera.ScreenPointToRay(mousePos);
+
         if (Physics.Raycast(ray, out hit, 1000, paintMask))
         {
             currentMousePos = hit.point;
