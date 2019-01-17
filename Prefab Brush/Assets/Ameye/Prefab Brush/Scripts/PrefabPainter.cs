@@ -130,7 +130,6 @@ namespace PrefabPainter {
             myWindow.Show();
             myWindow.Focus();
             myWindow.Repaint();
-
         }
 
 
