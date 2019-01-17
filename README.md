@@ -37,3 +37,6 @@ I (Alexander Ameye) am not actively working on this tool but when I do get the t
 - 'Painting rules' like 'don't paint on surfaces that have a slope that is > 10%'
 - Cleaner UI
 - Undo/redo support
+- Rewrite UI in UIElements
+
+
