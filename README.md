@@ -18,6 +18,7 @@ Import the project into Unity and open the prefab brush by clicking Tools -> Pre
 # Palettes
 
 > Right Mouse Click in Project window -> Prefab Painter -> Create Palette
+
 > In Prefab Painter window select palette and click "Import"
 
 # Compatibility
