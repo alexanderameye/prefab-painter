@@ -123,7 +123,7 @@ namespace PrefabPainter {
         bool isPainting = false;
         List<string> layerNames;
 
-        [MenuItem("Window/Prefab Brush")]
+        [MenuItem("Tools/Prefab Brush")]
         public static void Init()
         {
             PrefabPainter myWindow = (PrefabPainter)GetWindow(typeof(PrefabPainter));
