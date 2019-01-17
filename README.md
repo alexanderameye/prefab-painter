@@ -12,7 +12,7 @@ Import the project into Unity and open the prefab brush by clicking Tools>Prefab
 > alt + scroll to change the brush density
 
 # Compatibility
-FreePrefabPainter has been tested with Unity 2017.3.0b10.
+FreePrefabPainter has been tested with Unity 2018.3.0f2.
 
 # Support + More information
 https://forum.unity.com/threads/released-free-prefab-painter-github.506118/
