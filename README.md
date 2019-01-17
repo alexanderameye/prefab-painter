@@ -30,7 +30,7 @@ This prefab painter has been tested with Unity 2018.3.0f2.
 # Unity forum thread
 https://forum.unity.com/threads/released-free-prefab-painter-github.506118/
 
-# Future Features
+# Future Updates
 I (Alexander Ameye) am not actively working on this tool but when I do get the time to work on this project, these are the features I would like to add.
 
 - Align objects along normals
