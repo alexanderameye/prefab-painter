@@ -33,10 +33,13 @@ https://forum.unity.com/threads/released-free-prefab-painter-github.506118/
 # Future Updates
 I (Alexander Ameye) am not actively working on this tool but when I do get the time to work on this project, these are the features I would like to add.
 
-- Align objects along normals
-- 'Painting rules' like 'don't paint on surfaces that have a slope that is > 10%'
+- Align along surface normal
+- Slope painting rules
 - Cleaner UI
 - Undo/redo support
 - Rewrite UI in UIElements
+- 'Erase'brush
+- 'Grid' brush
+- Run-time prefab placing mode
 
 
