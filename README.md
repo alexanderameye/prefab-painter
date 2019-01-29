@@ -35,11 +35,13 @@ I (Alexander Ameye) am not actively working on this tool but when I do get the t
 
 - Align along surface normal
 - Slope painting rules
-- Cleaner UI
+- New UI
 - Undo/redo support
 - Rewrite UI in UIElements
 - 'Erase'brush
 - 'Grid' brush
 - Run-time prefab placing mode
+- Maybe instead of an editor window, have the painter as a 'brush gameobject' with the settings in the inspector. This way you don't need another editor window taking up space.
+- Add images to the read-me
 
 
