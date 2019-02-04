@@ -33,6 +33,7 @@ https://forum.unity.com/threads/released-free-prefab-painter-github.506118/
 # Roadmap
 These are the planned features in no particular order.
 
+- [X] New toolbar with palette saving/loading
 - [ ] Code cleanup
 - [ ] Align objects along surface normals
 - [ ] New UI
