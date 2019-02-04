@@ -31,9 +31,9 @@ This tool has been tested with Unity 2018.3.0f2.
 https://forum.unity.com/threads/released-free-prefab-painter-github.506118/
 
 # Roadmap
-These are the planned features in no particular order.
+These are the planned features in no particular order. Not all features marked 'done' are on GitHub already.
 
-- [X] New toolbar with palette saving/loading
+- [X] Improved palette system with new toolbar
 - [ ] Code cleanup
 - [ ] Align objects along surface normals
 - [ ] New UI
