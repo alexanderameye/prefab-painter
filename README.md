@@ -34,7 +34,6 @@ https://forum.unity.com/threads/released-free-prefab-painter-github.506118/
 These are the planned features in no particular order.
 
 - [ ] Code cleanup
-- [ ] Rewrite to a 'painter object' instead of an editor window
 - [ ] Align objects along surface normals
 - [ ] New UI
 - [ ] Slope and altitude painting rules
