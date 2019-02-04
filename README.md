@@ -30,19 +30,17 @@ This prefab painter has been tested with Unity 2018.3.0f2.
 # Unity forum thread
 https://forum.unity.com/threads/released-free-prefab-painter-github.506118/
 
-# Future Updates
-I (Alexander Ameye) am not actively working on this tool but when I do get the time to work on this project, these are the features I would like to add.
+# Roadmap
+These are the planned features in no particular order.
 
-- Align along surface normal
-- Slope and altitude painting rules
-- Probability settings
-- New UI
-- Undo/redo support
-- Rewrite UI in UIElements
-- 'Erase'brush
-- 'Grid' brush
-- Run-time prefab placing mode
-- Maybe instead of an editor window, have the painter as a 'brush gameobject' with the settings in the inspector. This way you don't need another editor window taking up space.
-- Add images to the read-me
-
+- [ ] Code cleanup
+- [ ] Rewrite to a 'painter object' instead of an editor window
+- [ ] Align objects along surface normals
+- [ ] New UI
+- [ ] Slope and altitude painting rules
+- [ ] Probability settings
+- [ ] Undo/redo support
+- [ ] Erase brush
+- [ ] Grid brush
+- [ ] Runtime prefab placing
 
