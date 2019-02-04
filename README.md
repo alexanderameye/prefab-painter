@@ -25,7 +25,7 @@ You can import/export these palettes into the prefab brush.
 > In Prefab Painter window select palette and click "Import"
 
 # Compatibility
-This prefab painter has been tested with Unity 2018.3.0f2.
+This tool has been tested with Unity 2018.3.0f2.
 
 # Unity forum thread
 https://forum.unity.com/threads/released-free-prefab-painter-github.506118/
