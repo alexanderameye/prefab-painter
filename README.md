@@ -17,12 +17,10 @@ Import the project into Unity3D and open the prefab brush tool by clicking Tools
 
 ## Palettes
 
-Palettes function like 'painting presets'. You could for example create a 'Forest Palette' that contains 3 different types of trees.
-You can import/export these palettes into the prefab brush.
+Palettes are 'painting presets'. You can for example create a 'Forest Palette' that contains 3 different types of trees.
+You can manage your palettes using the palette toolbar. You can use the 'Load' button to load a custom palette from your project folder, or you can create a new palette by clicking 'palettes>New Palette'. After you've edited a palette, don't forget to save it.
 
-> Right Mouse Click in Project window -> Prefab Painter -> Create Palette
-
-> In Prefab Painter window select palette and click "Import"
+![] (palettes.gif)
 
 # Compatibility
 This tool has been tested with Unity 2018.3.0f2.
@@ -34,7 +32,6 @@ https://forum.unity.com/threads/released-free-prefab-painter-github.506118/
 These are the planned features in no particular order. Not all features marked 'done' are on GitHub already.
 
 - [X] Improved palette system with new toolbar
-- [ ] Code cleanup
 - [ ] Align objects along surface normals
 - [ ] New UI
 - [ ] Slope and altitude painting rules
