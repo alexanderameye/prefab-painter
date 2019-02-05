@@ -32,10 +32,10 @@ https://forum.unity.com/threads/released-free-prefab-painter-github.506118/
 These are the planned features in no particular order. Not all features marked 'done' are on GitHub already.
 
 - [X] Improved palette system with new toolbar
-- [ ] Align objects along surface normals
-- [ ] New UI
+- [ ] Better prefab list UI
+- [ ] Code cleanup
 - [ ] Slope and altitude painting rules
-- [ ] Probability settings
+- [ ] Probability settings per prefab
 - [ ] Undo/redo support
 - [ ] Erase brush
 - [ ] Grid brush
