@@ -1,0 +1,173 @@
+﻿v0.2.0 - 2019/02/04
+===================
+NOTE: On first launch the serialized state of the server will be removed
+
+Added
+-----
+* https://trello.com/c/sjAXiOLh/99-create-prefab-from-selection
+
+Fixed
+-----
+* Fix #111: https://trello.com/c/eL9NNZfB/111-support-undo
+* Fix #115: https://trello.com/c/uO8vb6cy/115-deleting-prefabs-is-not-updating-the-indices-properly-post-process-command-is-being-sent-fine-but-you-can-still-search-for-them
+* Tentative fix for server wrongly detecting that Unity is not running and so kills itself by mistake
+
+v0.1.9 - 2019/01/31
+===================
+NOTE: On first launch the serialized state of the server will be removed
+
+Added
+-----
+* https://trello.com/c/cwruPJjJ/90-open-lighting-window
+  Type Light Settings (or just LS) to get to the lighting settings inspector
+  
+Fixed
+-----
+* Fix #104: https://trello.com/c/iA3grytH/104-server-is-crashing-when-using-operands
+* Serialize after processing post process commands
+* Fix #105: https://trello.com/c/O74bKTv0/105-npe-when-deleting-from-deleting-from-dictionary-and-trying-to-serialize
+* Fix #106: https://trello.com/c/0A3zCzTF/106-filtering-by-type-is-not-working-anymore
+  
+Modified
+--------
+* Renamed to Omnibar
+
+
+v0.1.8 - 2019/01/28
+===================
+NOTE: On first launch the serialized state of the server will be removed
+
+Added
+-----
+* https://trello.com/c/V7XxMuU3/68-reset-command
+  You can now reset the indexing and all settings with Reset Omnibar command
+* https://trello.com/c/ojyjTMyB/67-add-a-switch-to-stop-being-so-verbose-in-unity
+  You can now use VL=off to turn off the logging. In the future, by default it will be off in a more stable release
+* Support for other file types (csv, txt, cfg). This also required a refactor on how to index the files, now relying on filesystem rather than Unity. (Except for sprites)
+  https://trello.com/c/uH3kpCOZ/66-handle-files-that-dont-belong-to-a-particular-type.
+* Support for finding folders
+
+Fixed
+-----
+* Fix #77: https://trello.com/c/X6yMtN9H/77-on-indexing-first-time-i-saw-it-got-stuck-client-is-consuming-multiple-replies-as-one
+* Fix #86: https://trello.com/c/u7Bh5SSc/86-handle-unknown-filter-more-gracefully
+* Server sends results in one go.   Rather than keeping a queue of receiver callbacks, we are queuing Send requests. This solves the following problems:
+  Fix #88: https://trello.com/c/81fGhBvC/88-i-was-seeing-weird-results-being-displayed-server-was-sending-them-right-but-the-client-was-as-if-it-was-missing-or-merging-them
+  Fix #77: https://trello.com/c/X6yMtN9H/77-on-indexing-first-time-i-saw-it-got-stuck-client-is-consuming-multiple-replies-as-one
+* Improved responsiveness when pressing up/down keys
+* Fix #96: https://trello.com/c/HZ81yRA0/96-why-is-a-folder-name-eg-fff-scored-at-the-bottom-if-its-an-exact-match
+* Fix #94: https://trello.com/c/o7HazRHK/94-searching-for-navi-doesnt-list-the-folder-called-omnibar-even-if-with-just-n-its-visible
+* Fix #81: https://trello.com/c/6bEPTkNM/81-quit-if-unity-is-not-found-running
+* Fix #28: https://trello.com/c/OyyMyJgm/28-should-not-display-results-that-do-not-match-any-letter-eg-try-typing-inav-and-you-get-the-choc-results-wtf
+
+
+v0.1.7 - 2019/01/23
+===================
+NOTE: On first launch the serialized state of the server will be removed
+
+Added
+-----
+* Added Named Groups. https://trello.com/c/ktWhlvSZ/74-named-groups-for-gameobjects-selected
+  You can save the current selection in the scene into a named group
+  Save Group: just type SG=AwesomeGroup
+  Remove Group: just type RG=AwesomeGroup
+  Remove All Groups: just type RAG
+  Filter: just type g: followed by whatever search string you want to search, e.g. g:ag to quickly get to AwesomeGroup
+
+
+v0.1.6 - 2019/01/22
+===================
+NOTE: On first launch the serialized state of the server will be removed
+
+Added
+-----
+* Support for Recent Items. They come up when launching the search bar (https://trello.com/c/ULE6wJTf/5-recent-items)
+* Support for resetting pos/rot/scale for current selection (https://trello.com/c/GPVmmWBi/75-reset-pos-rot-scale-for-current-selection)
+  Just do Reset Position, Reset Rotation, Reset Scale to reset the local position of the selected items.
+  You can also use Reset World Position, Reset World Rotation, Reset Position Rotation Scale, Reset World Position Rotatation Scale.
+  Of course you can just use the camel casing, e.g. RP to reset the position.
+
+Fixed
+-----
+* Fix #73: https://trello.com/c/pTG6IxvH/73-highlight-hierarchy-or-project-tab-accordingly-after-selecting-an-item-because-currently-you-cannot-edit-delete-them-etc
+* Tentative fix #71: https://trello.com/c/6jaHuLgD/71-investigate-socket-exception
+* If server crashes or gets killed, it gets launched again automatically
+* Fix #76: https://trello.com/c/oQnvwcsz/76-fix-issue-of-error-exactly-after-indexing
+
+
+v0.1.5 - 2019/01/20
+===================
+NOTE: On first launch the serialized state of the server will be removed
+
+Added
+-----
+* Added support for shortcuts (e.g. Build Settings and Player Settings)
+* Added another state to show launching of server (also added throbbler)
+
+Fixed
+-----
+* Fix #15: https://trello.com/c/Zl6tpQVY/15-fix-on-click-textfield-reset
+* Fix #35: https://trello.com/c/0WVcG8cS/35-fix-color-scheme-when-not-in-dark-mode
+* Fix #62: https://trello.com/c/Tq90nZ9G/62-its-not-handling-files-with-capital-extensions
+* Fix #56: https://trello.com/c/Lvo70NJV/56-if-you-click-on-search-bar-and-click-out-again-and-you-press-ctrl-g-you-dont-type-in-the-box. On lose focus, window is now closed
+* Fix #60: https://trello.com/c/pR16sUii/60-dont-index-packages-folder
+* Tried fixing again: https://trello.com/c/n7HqmsyY/49-hide-command-prompt-of-server
+
+
+v0.1.4 - 2019/01/18
+===================
+
+Fixed
+-----
+* Reversed editor folder as otherwise gives a build error when doing standalone builds
+
+
+v0.1.3 - 2019/01/16
+===================
+
+Fixed
+-----
+* Fix #51: https://trello.com/c/UQ96S4Hx/51-prefabs-in-assets-being-indexed-as-scene-gameobjects
+* Fix #50: https://trello.com/c/w3cszsvC/50-enter-key-on-numeric-keypad-does-not-work
+* Attempt fix #49: https://trello.com/c/n7HqmsyY/49-hide-command-prompt-of-server
+
+
+v0.1.2 - 2019/01/16
+===================
+
+Added
+-----
+* Logging of indexing timing
+* Port number exposed in cfg file
+* Added time stamps to logging
+
+Fixed
+-----
+* Fix #40: https://trello.com/c/SLZz1kfF/40-on-windows-it-doesnt-detect-immediately-when-the-server-is-not-running-you-have-to-close-the-window-and-open-again-the-window-to
+* Fix #46: https://trello.com/c/bLjA0xHq/46-indexing-for-hierarchy-is-not-updating-when-adding-a-gameobject
+* Fix #45: https://trello.com/c/10c03082/45-not-finding-hierarchy-items-in-window
+* Some adjustments for layout on Windows
+
+
+v0.1.1 - 2019/01/11
+===================
+Fixed some issues on Windows
+
+Added
+-----
+* Showing of release notes!
+
+Fixed
+-----
+* Ctrl-F does not work on Windows. Using Ctrl-G
+* Fixed launching of server from Windows
+* Items not showing properly because of Unity still using "/" on Windows instead of "\"
+* Server was not starting
+
+v0.1 - 2019/01/10
+=================
+Initial testing build using server/client architecture
+
+Added
+-----
+* Support for sprites and detecting changes accordingly
