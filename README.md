@@ -2,9 +2,18 @@
 # Free Prefab Painter
 A free, basic prefab-painter for Unity3D.
 
-# Usage
+# Features
+- Paint on every type of surface (plane, terrain, sphere,...)
+- Paint multiple types of prefabs at once
+- Paint with random prefab rotations
+- Paint with random prefab sizes
+- Prefab previewer
+- Customizable brush size, density
+- Paint on selected layers
+- Palette/presets functionality with useful toolbar
 
-Import the project into Unity3D and open the prefab brush tool by clicking Tools -> Prefab Brush.
+# Usage
+Import the project into Unity3D and open the prefab brush tool by clicking Tools -> Prefab Painter.
 
 ## Painting
 
@@ -14,9 +23,7 @@ Import the project into Unity3D and open the prefab brush tool by clicking Tools
 
 > alt + scroll to change the brush density
 
-
 ## Palettes
-
 Palettes are 'painting presets'. You can for example create a 'Forest Palette' that contains 3 different types of trees.
 You can manage your palettes using the palette toolbar. You can use the 'Load' button to load a custom palette from your project folder, or you can create a new palette by clicking 'palettes>New Palette'. After you've edited a palette, don't forget to save it.
 
