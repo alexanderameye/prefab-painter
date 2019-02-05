@@ -43,7 +43,7 @@ These are the planned features in no particular order. Not all features marked '
 - [ ] Code cleanup
 - [ ] Slope and altitude painting rules
 - [ ] Probability settings per prefab
-- [ ] Undo/redo support
+- [X] Undo/redo support
 - [ ] Erase brush
 - [ ] Grid brush
 - [ ] Runtime prefab placing
