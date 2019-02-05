@@ -27,7 +27,7 @@ namespace PrefabPainter
 
         // Brush Settings
         public bool displayDebugInfo = true;
-        public float brushSize = 0.1f;
+        public float brushSize = 4f;
         public int brushDensity = 2;
         public LayerMask paintMask = 1;
         public float maxYPosition = 400;
@@ -139,15 +139,14 @@ namespace PrefabPainter
             if (GUILayout.Button("Load", "ToolbarButton"))
             {
                 string path = EditorUtility.OpenFilePanel("Select Palette", "", "asset");
-                Debug.Log("path: " + path);
                 path = path.Replace(Application.dataPath, "Assets");
-                Debug.Log("path: " + path);
                 if (path.Length != 0)
                 {
                     activePalette = (PaintPalette)AssetDatabase.LoadAssetAtPath(path, typeof(PaintPalette));
                     LoadPalette(activePalette);
                     if (!palettes.Contains(activePalette)) palettes.Add(activePalette);
                 }
+                Debug.Log("<color=cyan>[Prefab Painter] </color>Palette loaded.");
             }
             if (activePalette != null)
             {
@@ -459,6 +458,7 @@ namespace PrefabPainter
             if (prefabObj != null)
             {
                 go = (GameObject)PrefabUtility.InstantiatePrefab(prefabObj);
+                Undo.RegisterCreatedObjectUndo(go, "Prefab Paint");
 
                 if (MouseLocation)
                 {
