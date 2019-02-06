@@ -60,7 +60,7 @@ These are the planned features in no particular order. Not all features marked '
 
 > :heavy_check_mark: Package manager support
 
-> :x: Better prefab list UI
+> :x: Better prefab list UI with drag-and-drop functionality
 
 > :x: Code cleanup
 
