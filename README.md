@@ -1,4 +1,8 @@
 
+![](https://img.shields.io/badge/unity-2018.1%2B-blue.svg)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-blue.svg)](http://makeapullrequest.com)
+[![](https://img.shields.io/twitter/follow/alexanderameye.svg?label=Follow&style=social)](https://twitter.com/intent/follow?screen_name=alexanderameye)
+
 # Free Prefab Painter
 A free, basic prefab-painter for Unity3D.
 
