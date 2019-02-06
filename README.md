@@ -20,7 +20,7 @@ After you've downloaded the files, you have 3 options to 'install' this tool.
 * Referencing this git repository in your project manifest file
 
   ```json
-  "me.alexanderameye.prefab-painter": "https://github.com/alexanderameye/prefab-painter.git"
+  "me.ameye.prefab-painter": "https://github.com/alexanderameye/prefab-painter.git"
   ```
 
 # Features
