@@ -6,10 +6,22 @@
 # Free Prefab Painter
 A free, basic prefab-painter for Unity3D.
 
-![alt text](https://i.imgur.com/J9CQ67F.png)
+![UI](https://i.imgur.com/J9CQ67F.png)
 
-# Usage
-After you've download the files somewhere, open up the package manager in your Unity project and locate the package.json. This will import the tool as a Unity package. You can also just put all of files in your Unity project if you'd like to. 
+# Installation
+After you've downloaded the files, you have 3 options to 'install' this tool.
+
+* Install it by directly putting the downloaded files in your Assets/ folder
+
+* Install it by locating the package.json file through the package manager
+
+![UPM](https://i.imgur.com/y09xzYA.png)
+
+* Referencing this git repository in your project manifest file
+
+  ```json
+  "me.alexanderameye.prefab-painter": "https://github.com/alexanderameye/prefab-painter.git"
+  ```
 
 # Features
 - Paint on every type of surface (plane, terrain, sphere,...)
@@ -42,14 +54,22 @@ https://forum.unity.com/threads/released-free-prefab-painter-github.506118/
 # Roadmap
 These are the planned features in no particular order. Not all features marked 'done' are on GitHub already.
 
-- [X] Improved palette system with new toolbar
-- [ ] Better prefab list UI
-- [ ] Code cleanup
-- [ ] Slope and altitude painting rules
-- [ ] Probability settings per prefab
-- [X] Undo/redo support
-- [ ] Erase brush
-- [ ] Grid brush
-- [ ] Runtime prefab placing
-- [X] Package manager support
+> :heavy_check_mark: Improved palette system with new toolbar
 
+> :heavy_check_mark: Undo/redo support
+
+> :heavy_check_mark: Package manager support
+
+> :x: Better prefab list UI
+
+> :x: Code cleanup
+
+> :x: Slope and altitude painting rules
+
+> :x: Probability settings per prefab
+
+> :x: Erase brush
+
+> :x: Grid brush
+
+> :x: Runtime prefab placing
