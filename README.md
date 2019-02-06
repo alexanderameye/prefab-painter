@@ -4,6 +4,9 @@ A free, basic prefab-painter for Unity3D.
 
 ![alt text](https://i.imgur.com/J9CQ67F.png)
 
+# Usage
+After you've download the files somewhere, open up the package manager in your Unity project and locate the package.json. This will import the tool as a Unity package. You can also just put all of files in your Unity project if you'd like to. 
+
 # Features
 - Paint on every type of surface (plane, terrain, sphere,...)
 - Paint multiple types of prefabs at once
@@ -13,9 +16,6 @@ A free, basic prefab-painter for Unity3D.
 - Customizable brush size, density
 - Paint on selected layers
 - Palette/presets functionality with useful toolbar
-
-# Usage
-Import the project into Unity3D and open the prefab brush tool by clicking Tools -> Prefab Painter.
 
 ## Painting
 
@@ -47,4 +47,5 @@ These are the planned features in no particular order. Not all features marked '
 - [ ] Erase brush
 - [ ] Grid brush
 - [ ] Runtime prefab placing
+- [X] Package manager support
 
