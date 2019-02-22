@@ -6,7 +6,7 @@
 # Free Prefab Painter
 A free, basic prefab-painter for Unity3D.
 
-![UI](https://i.imgur.com/J9CQ67F.png)
+![UI](https://i.imgur.com/hZ0LTU5.png)
 
 # Installation
 After you've downloaded the files, you have 3 options to 'install' this tool.
