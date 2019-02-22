@@ -83,6 +83,8 @@ These are the planned features in no particular order. Not all features marked '
 
 > :x: New painting handle look
 
+> :x: Paint aligned to painting stroke
+
 
 # Known Issues
 These are some known issues and inconveniences I'd like to fix.
