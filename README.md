@@ -62,6 +62,10 @@ These are the planned features in no particular order. Not all features marked '
 
 > :soon: Better prefab list UI with drag-and-drop functionality
 
+> :x: Prefab list multi-select and delete functionality
+
+> :x: Palette save location menu and renaming functionality
+
 > :x: Code cleanup
 
 > :x: Slope and altitude painting rules
