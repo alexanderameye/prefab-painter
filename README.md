@@ -46,7 +46,7 @@ Palettes are 'painting presets'. You can for example create a 'Trees' that conta
 You can manage your palettes using the palette toolbar. You can use the 'Load' button to load a custom palette from your project folder, or you can create a new palette by clicking 'palettes > New Palette'. After you've edited a palette, don't forget to save it.
 You can relocate or rename palettes however you want.
 
-![Palettes](https://i.imgur.com/gVyBWVR.png)
+![Palettes](https://i.imgur.com/skjtNka.png)
 
 # Compatibility
 This tool has been tested with Unity 2018.3.0f2.
