@@ -77,3 +77,15 @@ These are the planned features in no particular order. Not all features marked '
 > :x: Grid brush
 
 > :x: Runtime prefab placing
+
+
+# Known Issues
+These are some known issues and inconveniences I'd like to fix.
+
+> :beetle: Sometimes when you edit the settings of a prefab, the settings don't get registered without pressing enter
+
+> :beetle: Some prefabs don't get placed
+
+> :beetle: The palette system sometimes breaks when you delete palettes
+
+> :beetle: You can't save palettes with a specific name, the tool decides it for you
