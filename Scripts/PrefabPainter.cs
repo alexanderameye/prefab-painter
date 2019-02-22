@@ -8,8 +8,25 @@ namespace PrefabPainter
     {
         Vector2 scrollPos;
         Rect windowBounds = new Rect(0, 0, 0, 0);
+
+        // Layout Processing
+        Event currentEvent;
+
+        // Palettes
         private Texture2D deleteIcon;
         private Texture2D saveIcon;
+        [SerializeField]
+        PaintPalette activePalette;
+        List<PaintPalette> palettes = new List<PaintPalette>();
+        bool creatingNewPalette = false;
+        public float SizeInterval = 0.10f;
+
+        // Prefab List
+        PaintObject selectedPrefab;
+        float prefabListHeight;
+        private Texture2D blueTexture;
+        private Texture2D greyTexture;
+        private bool displayPrefabSettings;
 
         // Brush Gizmo
         Color activeOuterColor = new Color(0.15f, 0.75f, 1f);
@@ -23,7 +40,6 @@ namespace PrefabPainter
         RaycastHit mouseHitPoint;
         string MouseLocationName = "Mouse Location";
         Transform MouseLocation;
-        Event currentEvent;
 
         // Brush Settings
         public bool displayDebugInfo = true;
@@ -31,29 +47,20 @@ namespace PrefabPainter
         public int brushDensity = 2;
         public LayerMask paintMask = 1;
         public float maxYPosition = 400;
-        public PaintPalette palette = null;
 
         // Paint Objects
         GameObject paintGroup;
         string paintGroupName = "Paint";
-        public int listSize = 1;
+        public int listSize = 0;
         public List<PaintObject> paintObjects;
         bool isPainting;
         List<string> layerNames;
-
-        // Palettes
-        [SerializeField]
-        PaintPalette activePalette;
-        List<PaintPalette> palettes = new List<PaintPalette>();
-        bool creatingNewPalette = false;
-        public float SizeInterval = 0.10f;
 
         [MenuItem("Tools/Prefab Painter")]
         static void Init()
         {
             PrefabPainter window = (PrefabPainter)GetWindow(typeof(PrefabPainter));
             window.titleContent = new GUIContent("Prefab Painter");
-
             window.Show();
             window.Focus();
             window.Repaint();
@@ -61,15 +68,30 @@ namespace PrefabPainter
 
         void OnEnable()
         {
+            listSize = 0;
             SceneView.onSceneGUIDelegate += SceneGUI;
             EditorApplication.hierarchyChanged += HierarchyChanged;
             if (paintObjects == null) paintObjects = new List<PaintObject>();
-            listSize = 1;
             layerNames = new List<string>();
             for (int i = 0; i <= 10; i++) layerNames.Add(LayerMask.LayerToName(i));
 
             deleteIcon = EditorGUIUtility.Load("icons/d_TreeEditor.Trash.png") as Texture2D;
             saveIcon = EditorGUIUtility.Load("icons/SaveActive.png") as Texture2D;
+
+            blueTexture = new Texture2D(64, 64);
+            greyTexture = new Texture2D(64, 64);
+
+            for (int y = 0; y < blueTexture.height; y++)
+            {
+                for (int x = 0; x < blueTexture.width; x++)
+                {
+                    blueTexture.SetPixel(x, y, new Color(0.25f, 0.42f, 0.66f));
+                    greyTexture.SetPixel(x, y, new Color(0.75f, 0.75f, 0.75f));
+                }
+            }
+
+            blueTexture.Apply();
+            greyTexture.Apply();
         }
 
         void OnDisable()
@@ -197,10 +219,14 @@ namespace PrefabPainter
             EndFold();
 
             listSize = Mathf.Max(0, listSize);
-            for (int i = 0; i < paintObjects.Count; i++) PaintObject.Display(paintObjects[i]);
-            if (GUILayout.Button("Add Prefab")) listSize++;
-            if (GUILayout.Button("Remove Prefab") && listSize != 0) listSize--;
+
+            DisplayPrefabs(paintObjects);
+            if (Event.current.type == EventType.Layout && selectedPrefab != null) displayPrefabSettings = true;
+
+            if (displayPrefabSettings) selectedPrefab.displaySettings();
+
             EditorGUILayout.Space();
+            GUILayout.Space(75f + prefabListHeight);
             CheckForChanges(tempSize, tempDensity);
             EditorGUILayout.EndScrollView();
         }
@@ -259,7 +285,7 @@ namespace PrefabPainter
             creatingNewPalette = false;
         }
 
-         void OnClearList()
+        void OnClearList()
         {
             palettes.Clear();
         }
@@ -291,7 +317,7 @@ namespace PrefabPainter
                 for (int i = 0; i < listSize; i++)
                 {
                     if (paintObjects.Count > i) tempObj.Add(paintObjects[i]);
-                    else tempObj.Add(new PaintObject());
+                    else tempObj.Add(new PaintObject(null));
                 }
 
                 paintObjects = new List<PaintObject>(tempObj);
@@ -422,7 +448,7 @@ namespace PrefabPainter
                     DrawPaint();
                 }
             }
-            else Debug.LogWarning("Prefab list is empty!");
+            else Debug.LogWarning("[Prefab Painter] Prefab list is empty!");
         }
 
         void DrawPaint()
@@ -453,7 +479,7 @@ namespace PrefabPainter
         GameObject SpawnObject(Vector3 pos)
         {
             int rndIndex = Random.Range(0, paintObjects.Count);
-            GameObject prefabObj = paintObjects[rndIndex].prefab;
+            GameObject prefabObj = paintObjects[rndIndex].GetGameObject();
             GameObject go = null;
             if (prefabObj != null)
             {
@@ -468,15 +494,15 @@ namespace PrefabPainter
 
                 else go.transform.rotation = Quaternion.identity;
 
-                bool randomRotationX = paintObjects[rndIndex].randomRotationX;
-                bool randomRotationY = paintObjects[rndIndex].randomRotationY;
-                bool randomRotationZ = paintObjects[rndIndex].randomRotationZ;
+                bool randomRotationX = paintObjects[rndIndex].getRandomRotationX();
+                bool randomRotationY = paintObjects[rndIndex].getRandomRotationY();
+                bool randomRotationZ = paintObjects[rndIndex].getRandomRotationZ();
 
                 if (randomRotationX) go.transform.Rotate(Vector3.right, Random.Range(0, 360));
                 if (randomRotationY) go.transform.Rotate(Vector3.up, Random.Range(0, 360));
                 if (randomRotationZ) go.transform.Rotate(Vector3.forward, Random.Range(0, 360));
 
-                Vector2 scale = paintObjects[rndIndex].scale;
+                Vector2 scale = paintObjects[rndIndex].getSize();
                 if (scale != Vector2.one && scale != Vector2.zero)
                     go.transform.localScale *= Random.Range(scale.x, scale.y);
                 go.transform.position = pos;
@@ -523,7 +549,6 @@ namespace PrefabPainter
                     }
                 }
             }
-
             DestroyImmediate(obj);
         }
 
@@ -552,6 +577,94 @@ namespace PrefabPainter
             GUILayout.Space(3);
             EditorGUILayout.EndVertical();
             GUILayout.Space(0);
+        }
+
+        public void DisplayPrefabs(List<PaintObject> prefabs)
+        {
+            int numberOfPrefabs = prefabs.Count;
+            int windowWidth = (int)EditorGUIUtility.currentViewWidth;
+
+            int y;
+            if (selectedPrefab != null) y = 215;
+            else y = 110;
+
+            for (int i = 0; i < numberOfPrefabs; i++)
+            {
+                var e = Event.current;
+                GameObject go = prefabs[i].GetGameObject();
+
+                int columns = Mathf.FloorToInt(windowWidth / (50 + 20) + 1);
+                int rows = Mathf.FloorToInt(numberOfPrefabs / columns);
+                prefabListHeight = rows * 50f;
+                int posX = 5 + 50 * (i - (Mathf.FloorToInt(i / columns)) * columns);
+                int posY = y + 50 * Mathf.FloorToInt(i / columns);
+
+                Rect r = new Rect(posX, posY, 50, 50);
+                Rect border = new Rect(r.x + 2, r.y + 6, r.width - 4, r.height - 4);
+
+                if (r.Contains(Event.current.mousePosition) && e.type == EventType.MouseDown && e.button == 0)
+                {
+                    selectedPrefab = prefabs[i];
+                    Repaint();
+                }
+
+                if (prefabs[i] == selectedPrefab && selectedPrefab != null) EditorGUI.DrawPreviewTexture(border, blueTexture, null, ScaleMode.ScaleToFit, 0f);
+                else EditorGUI.DrawPreviewTexture(border, greyTexture, null, ScaleMode.ScaleToFit, 0f);
+
+                border.x += 2;
+                border.y += 2;
+                border.width -= 4;
+                border.height -= 4;
+
+                Texture2D preview = AssetPreview.GetAssetPreview(go);
+
+                if (preview != null)
+                {
+                    EditorGUI.DrawPreviewTexture(border, preview, null, ScaleMode.ScaleToFit, 0f);
+                }
+            }
+
+            int c = Mathf.FloorToInt(windowWidth / (50 + 20) + 1);
+            int xRect = 5 + 50 * (numberOfPrefabs - (Mathf.FloorToInt(numberOfPrefabs / c)) * c);
+            int yRect = y + 50 * Mathf.FloorToInt(numberOfPrefabs / c);
+
+            DropAreaGUI(new Rect(xRect + 2, yRect + 6, 46, 46));
+        }
+
+        public void DropAreaGUI(Rect r)
+        {
+            var e = Event.current;
+            var dropArea = r;
+            GUI.Box(dropArea, string.Empty);
+            GUI.Label(dropArea, "+", EditorStyles.centeredGreyMiniLabel);
+
+            switch (e.type)
+            {
+                case EventType.DragUpdated:
+                case EventType.DragPerform:
+                    if (!dropArea.Contains(e.mousePosition))
+                        return;
+
+                    DragAndDrop.visualMode = DragAndDropVisualMode.Copy;
+
+                    if (e.type == EventType.DragPerform)
+                    {
+                        DragAndDrop.AcceptDrag();
+
+                        foreach (Object dragged_object in DragAndDrop.objectReferences)
+                        {
+                            if (dragged_object is GameObject)
+                            {
+                                GameObject go = (GameObject)dragged_object;
+                                PaintObject po = new PaintObject(go);
+                                po.setName(dragged_object.name);
+                                paintObjects.Add(po);
+                                listSize++;
+                            }
+                        }
+                    }
+                    break;
+            }
         }
     }
 }

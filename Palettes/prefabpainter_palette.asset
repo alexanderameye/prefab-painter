@@ -13,9 +13,7 @@ MonoBehaviour:
   m_Name: prefabpainter_palette
   m_EditorClassIdentifier: 
   palette:
-  - prefab: {fileID: 1128653391106578, guid: 44a1790e087c3044c94a350374986e96, type: 3}
-    scale: {x: 1, y: 1}
-    randomRotationX: 0
-    randomRotationY: 0
-    randomRotationZ: 0
-    gameObjectEditor: {fileID: 0}
+  - gameObjectEditor: {fileID: 0}
+  - gameObjectEditor: {fileID: 0}
+  - gameObjectEditor: {fileID: 0}
+  - gameObjectEditor: {fileID: 0}

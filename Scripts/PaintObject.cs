@@ -6,74 +6,77 @@ namespace PrefabPainter
     [System.Serializable]
     public class PaintObject
     {
-        public GameObject prefab = null;
-        public Vector2 scale = Vector2.one;
-        public bool randomRotationX = false;
-        public bool randomRotationY = false;
-        public bool randomRotationZ = false;
+        private GameObject go;
+        private Vector2 size = Vector2.one;
+        private bool randomRotationX = false;
+        private bool randomRotationY = false;
+        private bool randomRotationZ = false;
+        private string prefabName;
+
+        private bool settingsToggled;
 
         [HideInInspector] public Editor gameObjectEditor;
 
-        public static void Display(PaintObject obj)
+        public PaintObject(GameObject go)
         {
-            if (obj == null) return;
+            this.go = go;
+        }
 
-            Texture2D background = new Texture2D(128, 128);
-
-            for (int y = 0; y < 128; y++)
-            {
-                for (int x = 0; x < 128; x++)
-                {
-                    background.SetPixel(x, y, Color.grey);
-                }
-            }
-
-            background.Apply();
-
+        public void displaySettings()
+        {
             EditorGUILayout.BeginVertical(PrefabPainter.BoxStyle);
             GUILayout.Space(3);
 
-            EditorGUI.BeginChangeCheck();
-            GameObject gameObject = obj.prefab;
-            if (EditorGUI.EndChangeCheck())
-            {
-                if (obj.gameObjectEditor != null) Object.DestroyImmediate(obj.gameObjectEditor);
-            }
+            if (prefabName == "") GUILayout.Label("Prefab Settings", EditorStyles.boldLabel);
+            else GUILayout.Label("Prefab Settings - " + prefabName, EditorStyles.boldLabel);
 
-            GUIStyle bgColor = new GUIStyle();
-            bgColor.normal.background = background;
-
-            if (gameObject != null)
-            {
-                if (obj.gameObjectEditor == null)
-                    obj.gameObjectEditor = Editor.CreateEditor(gameObject);
-
-                obj.gameObjectEditor.OnInteractivePreviewGUI(GUILayoutUtility.GetRect(50, 50), bgColor);
-            }
-
-            EditorGUI.BeginChangeCheck();
-            gameObject = (GameObject) EditorGUILayout.ObjectField("", obj.prefab, typeof(GameObject), true);
-            obj.prefab = gameObject;
-            if (EditorGUI.EndChangeCheck())
-            {
-                if (obj.gameObjectEditor != null) Object.DestroyImmediate(obj.gameObjectEditor);
-            }
-
-            if (obj.prefab != null)
-            {
-                obj.scale.x = EditorGUILayout.FloatField("Min Size", obj.scale.x);
-                obj.scale.y = EditorGUILayout.FloatField("Max Size", obj.scale.y);
-                GUILayout.Label("Random Rotation :");
-                EditorGUILayout.BeginHorizontal();
-                obj.randomRotationX = GUILayout.Toggle(obj.randomRotationX, "X");
-                obj.randomRotationY = GUILayout.Toggle(obj.randomRotationY, "Y");
-                obj.randomRotationZ = GUILayout.Toggle(obj.randomRotationZ, "Z");
-                EditorGUILayout.EndHorizontal();
-            }
+            size.x = EditorGUILayout.FloatField("Min Size", size.x);
+            size.y = EditorGUILayout.FloatField("Max Size", size.y);
+            GUILayout.Label("Random Rotation :");
+            EditorGUILayout.BeginHorizontal();
+            randomRotationX = GUILayout.Toggle(randomRotationX, "X");
+            randomRotationY = GUILayout.Toggle(randomRotationY, "Y");
+            randomRotationZ = GUILayout.Toggle(randomRotationZ, "Z");
+            EditorGUILayout.EndHorizontal();
 
             GUILayout.Space(3);
             EditorGUILayout.EndVertical();
             GUILayout.Space(0);
+        }
+
+        public bool getRandomRotationX()
+        {
+            return randomRotationX;
+        }
+
+        public bool getRandomRotationY()
+        {
+            return randomRotationY;
+        }
+
+        public bool getRandomRotationZ()
+        {
+            return randomRotationZ;
+        }
+
+        public Vector2 getSize()
+        {
+            return size;
+        }
+
+        public GameObject GetGameObject()
+        {
+            return go;
+        }
+
+        public void setName(string name)
+        {
+            prefabName = name;
+        }
+
+        public string getName()
+        {
+            return prefabName;
         }
     }
 }
