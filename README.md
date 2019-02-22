@@ -42,8 +42,11 @@ After you've downloaded the files, you have 3 options to 'install' this tool.
 > alt + scroll to change the brush density
 
 ## Palettes
-Palettes are 'painting presets'. You can for example create a 'Forest Palette' that contains 3 different types of trees.
-You can manage your palettes using the palette toolbar. You can use the 'Load' button to load a custom palette from your project folder, or you can create a new palette by clicking 'palettes>New Palette'. After you've edited a palette, don't forget to save it.
+Palettes are 'painting presets'. You can for example create a 'Trees' that contains 3 different types of trees.
+You can manage your palettes using the palette toolbar. You can use the 'Load' button to load a custom palette from your project folder, or you can create a new palette by clicking 'palettes > New Palette'. After you've edited a palette, don't forget to save it.
+You can relocate or rename palettes however you want.
+
+![Palettes](https://i.imgur.com/skjtNka.png)
 
 # Compatibility
 This tool has been tested with Unity 2018.3.0f2.
