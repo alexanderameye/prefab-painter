@@ -81,6 +81,8 @@ These are the planned features in no particular order. Not all features marked '
 
 > :x: Runtime prefab placing
 
+> :x: New painting handle look
+
 
 # Known Issues
 These are some known issues and inconveniences I'd like to fix.
