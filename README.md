@@ -30,7 +30,7 @@ After you've downloaded the files, you have 3 options to 'install' this tool.
 - Prefab previewer
 - Customizable brush size, density
 - Paint on selected layers
-- Palette/presets functionality with useful toolbar
+- Palettes/presets functionality with useful toolbar
 - Dynamic prefab list
 
 ## Painting
@@ -64,7 +64,7 @@ These are the planned features in no particular order. Not all features marked '
 
 > :x: Prefab list multi-select and delete functionality
 
-> :x: Palette save location menu and renaming functionality
+> :soon: Palette save location menu and renaming functionality
 
 > :x: Code cleanup
 
@@ -86,6 +86,3 @@ These are some known issues and inconveniences I'd like to fix.
 
 > :beetle: Some prefabs don't get placed
 
-> :beetle: The palette system sometimes breaks when you delete palettes
-
-> :beetle: You can't save palettes with a specific name, the tool decides it for you
