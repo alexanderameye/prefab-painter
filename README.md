@@ -11,13 +11,12 @@ A free, basic prefab-painter for Unity3D.
 # Installation
 After you've downloaded the files, you have 3 options to 'install' this tool.
 
-* Install it by directly putting the downloaded files in your Assets/ folder
+* Download this repository and put the downloaded files in your Assets/ folder
+* Download this repository somewhere in your files. Then in Unity locate the package.json file through the package manager UI
 
-* Install it by locating the package.json file through the package manager
+![UPM](https://i.imgur.com/yZmyznp.png)
 
-![UPM](https://i.imgur.com/y09xzYA.png)
-
-* Referencing this git repository in your project manifest file
+* Reference this git repository in your project manifest file
 
   ```json
   "me.ameye.prefab-painter": "https://github.com/alexanderameye/prefab-painter.git"
@@ -32,6 +31,7 @@ After you've downloaded the files, you have 3 options to 'install' this tool.
 - Customizable brush size, density
 - Paint on selected layers
 - Palette/presets functionality with useful toolbar
+- Dynamic prefab list
 
 ## Painting
 
@@ -60,7 +60,7 @@ These are the planned features in no particular order. Not all features marked '
 
 > :heavy_check_mark: Package manager support
 
-> :soon: Better prefab list UI with drag-and-drop functionality
+> :heavy_check_mark: Better prefab list UI with drag-and-drop functionality
 
 > :x: Prefab list multi-select and delete functionality
 
