@@ -67,7 +67,7 @@ These are the planned features in no particular order. Not all features marked '
 
 > :x: Prefab list multi-select and delete functionality
 
-> :x: Palette save location menu and renaming functionality
+> :heavy_check_mark: Palette save location menu and renaming functionality
 
 > :x: Code cleanup
 
