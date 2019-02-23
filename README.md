@@ -19,7 +19,7 @@ After you've downloaded the files, you have 3 options to 'install' this tool.
 * Reference this git repository in your project manifest file
 
   ```json
-  "com.ameye.prefab-painter": "https://github.com/alexanderameye/prefab-painter.git"
+  "me.ameye.prefab-painter": "https://github.com/alexanderameye/prefab-painter.git"
   ```
 
 # Features
@@ -67,7 +67,7 @@ These are the planned features in no particular order. Not all features marked '
 
 > :x: Prefab list multi-select and delete functionality
 
-> :soon: Palette save location menu and renaming functionality
+> :x: Palette save location menu and renaming functionality
 
 > :x: Code cleanup
 
