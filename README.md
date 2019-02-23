@@ -14,7 +14,7 @@ After you've downloaded the files, you have 3 options to 'install' this tool.
 * Download this repository and put the downloaded files in your Assets/ folder
 * Download this repository somewhere in your files. Then in Unity locate the package.json file through the package manager UI
 
-![UPM](https://i.imgur.com/yZmyznp.png)
+![UPM](https://i.imgur.com/HiaOKBa.png)
 
 * Reference this git repository in your project manifest file
 
