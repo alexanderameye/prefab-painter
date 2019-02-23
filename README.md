@@ -19,7 +19,7 @@ After you've downloaded the files, you have 3 options to 'install' this tool.
 * Reference this git repository in your project manifest file
 
   ```json
-  "me.ameye.prefab-painter": "https://github.com/alexanderameye/prefab-painter.git"
+  "com.ameye.prefab-painter": "https://github.com/alexanderameye/prefab-painter.git"
   ```
 
 # Features
