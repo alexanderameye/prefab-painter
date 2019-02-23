@@ -20,6 +20,7 @@ namespace PrefabPainter
         List<PaintPalette> palettes = new List<PaintPalette>();
         bool creatingNewPalette = false;
         public float SizeInterval = 0.10f;
+        public bool displayOverrideWarning = true;
 
         // Prefab List
         PaintObject selectedPrefab;
@@ -85,7 +86,9 @@ namespace PrefabPainter
             {
                 for (int x = 0; x < blueTexture.width; x++)
                 {
-                    blueTexture.SetPixel(x, y, new Color(0.25f, 0.42f, 0.66f));
+                    //rgb(0,191,255)
+                   // blueTexture.SetPixel(x, y, new Color(0.25f, 0.42f, 0.66f));
+                    blueTexture.SetPixel(x, y, new Color(0f, 0.8f, 1f));
                     greyTexture.SetPixel(x, y, new Color(0.75f, 0.75f, 0.75f));
                 }
             }
@@ -167,8 +170,8 @@ namespace PrefabPainter
                     activePalette = (PaintPalette)AssetDatabase.LoadAssetAtPath(path, typeof(PaintPalette));
                     LoadPalette(activePalette);
                     if (!palettes.Contains(activePalette)) palettes.Add(activePalette);
+                    Debug.Log("<color=cyan>[Prefab Painter] </color>Palette loaded.");
                 }
-                Debug.Log("<color=cyan>[Prefab Painter] </color>Palette loaded.");
             }
             if (activePalette != null)
             {
@@ -179,7 +182,31 @@ namespace PrefabPainter
             GUILayout.FlexibleSpace();
             if (GUILayout.Button(new GUIContent("", saveIcon, "Save active prefabs as palette."), "ToolbarButton"))
             {
-                if (activePalette != null && palettes.Contains(activePalette)) OverridePalette(activePalette);
+                if (activePalette != null && palettes.Contains(activePalette))
+                {
+                    if (displayOverrideWarning)
+                    {
+                        switch (EditorUtility.DisplayDialogComplex("Override palette", "Saving the current palette will override the currently active palette which is '" + activePalette.name + "'.", "Okay", "Cancel", "Okay and do not show again"))
+                        {
+                            case 0:
+                                OverridePalette(activePalette);
+                                break;
+                            case 1:
+                                break;
+                            case 2:
+                                OverridePalette(activePalette);
+                                displayOverrideWarning = false;
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                    else
+                    {
+                        OverridePalette(activePalette);
+                    }
+
+                }
                 else CreateNewPalette();
             }
             if (GUILayout.Button(new GUIContent("", deleteIcon, "Remove currently loaded palette."), "ToolbarButton")) Debug.Log("Remove Palette");
@@ -190,7 +217,7 @@ namespace PrefabPainter
                 {
                     for (int i = 0; i < palettes.Count; i++)
                     {
-                        AddMenuItemForPalette(menu, palettes[i].name, palettes[i]);
+                        if(palettes[i] != null) AddMenuItemForPalette(menu, palettes[i].name, palettes[i]);
                     }
                 }
                 menu.AddItem(new GUIContent("New Palette"), creatingNewPalette, OnNewPaletteSelected);
@@ -240,29 +267,49 @@ namespace PrefabPainter
         {
             listSize = palette.palette.Count;
             paintObjects = palette.palette;
-            foreach (PaintObject brush in paintObjects) brush.gameObjectEditor = null;
+            bool missingPrefabs = false;
+            for(int i = 0;i<listSize;i++)
+            {
+                if(paintObjects[i].GetGameObject() == null) missingPrefabs = true;
+            }
+
+            if(missingPrefabs) Debug.Log("<color=cyan>[Prefab Painter] </color>One or more prefabs could not be loaded.");
         }
 
         void LoadEmptyPalette()
         {
             listSize = 0;
             paintObjects = new List<PaintObject>();
-            foreach (PaintObject brush in paintObjects) brush.gameObjectEditor = null;
         }
 
         void CreateNewPalette()
         {
-            PaintPalette asset = ScriptableObject.CreateInstance<PaintPalette>();
-            asset.palette = paintObjects;
-            string path = AssetDatabase.GenerateUniqueAssetPath("Assets/prefabpainter_palette.asset");
-            AssetDatabase.CreateAsset(asset, path);
-            AssetDatabase.SaveAssets();
-            palettes.Add(asset);
-            EditorUtility.FocusProjectWindow();
-            Selection.activeObject = asset;
-            activePalette = asset;
-            creatingNewPalette = false;
+            string relativePath = "";
+            string absolutePath = EditorUtility.SaveFilePanel("Save Palette", "Assets/", "New Palette", "asset");
+
+            if (absolutePath.StartsWith(Application.dataPath))
+            {
+                relativePath = "Assets" + absolutePath.Substring(Application.dataPath.Length);
+            }
+
+            if (relativePath.Length != 0)
+            {
+                PaintPalette asset = ScriptableObject.CreateInstance<PaintPalette>();
+                asset.palette = paintObjects;
+                AssetDatabase.CreateAsset(asset, relativePath);
+                AssetDatabase.SaveAssets();
+                palettes.Add(asset);
+                EditorUtility.FocusProjectWindow();
+                Selection.activeObject = asset;
+                activePalette = asset;
+                creatingNewPalette = false;
+
+                Debug.Log("<color=cyan>[Prefab Painter] </color>Palette saved.");
+            }
+
+            else Debug.Log("<color=cyan>[Prefab Painter] </color>Selected path is invalid.");
         }
+
 
         void AddMenuItemForPalette(GenericMenu menu, string menuPath, PaintPalette palette)
         {

@@ -3,8 +3,8 @@
     "references": [],
     "optionalUnityReferences": [],
     "includePlatforms": [
-        "Editor"
-    ],
+		"Editor"
+	],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
     "overrideReferences": false,
