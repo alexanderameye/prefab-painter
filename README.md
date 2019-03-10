@@ -67,13 +67,15 @@ These are the planned features in no particular order. Not all features marked '
 
 > :heavy_check_mark: Better prefab list UI with drag-and-drop functionality
 
-> :x: Prefab list multi-select and delete functionality
-
 > :heavy_check_mark: Palette save location menu and renaming functionality
 
-> :x: Code cleanup
+> :x: Prefab list multi-select and delete functionality
+
+> :x: Painting code cleanup
 
 > :x: Slope and altitude painting rules
+
+> :x: New painting handle look
 
 > :x: Probability settings per prefab
 
@@ -82,8 +84,6 @@ These are the planned features in no particular order. Not all features marked '
 > :x: Grid brush
 
 > :x: Runtime prefab placing
-
-> :x: New painting handle look
 
 > :x: Paint aligned to painting stroke
 
