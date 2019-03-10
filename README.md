@@ -41,6 +41,8 @@ After you've downloaded the files, you have 3 options to 'install' this tool.
 
 > alt + scroll to change the brush density
 
+Make sure that the layer settings in the prefab painter are set up correctly!
+
 ## Palettes
 Palettes are 'painting presets'. You can for example create a 'Trees' that contains 3 different types of trees.
 You can manage your palettes using the palette toolbar. You can use the 'Load' button to load a custom palette from your project folder, or you can create a new palette by clicking 'palettes > New Palette'. After you've edited a palette, don't forget to save it.
@@ -92,4 +94,6 @@ These are some known issues and inconveniences I'd like to fix.
 > :beetle: Sometimes when you edit the settings of a prefab, the settings don't get registered without pressing enter
 
 > :beetle: Some prefabs don't get placed
+
+> :beetle: Undo error when undo object is null
 
