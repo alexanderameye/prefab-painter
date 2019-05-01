@@ -586,7 +586,8 @@ namespace PrefabPainter
                 {
                     obj.SetActive(true);
 
-                    if (Physics.Raycast(groundHit.point, obj.transform.up, out objectHit, Mathf.Infinity, paintMask) &&
+                    int objMask = 1 << obj.layer;
+                    if (Physics.Raycast(groundHit.point, obj.transform.up, out objectHit, Mathf.Infinity, objMask) &&
                         obj.layer == objectHit.collider.gameObject.layer)
                     {
                         Vector3 newPos;
