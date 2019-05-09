@@ -48,6 +48,9 @@ namespace PrefabPainter
         public int brushDensity = 2;
         public LayerMask paintMask = 1;
         public float maxYPosition = 400;
+        // Prevents the prefabs being spawned with their up direction using the surface normal,
+        // but instead uses the global up direction
+        public bool lockUp = false;
 
         // Paint Objects
         GameObject paintGroup;
@@ -242,6 +245,7 @@ namespace PrefabPainter
                 brushSize = EditorGUILayout.FloatField("Brush Size", brushSize);
                 brushDensity = EditorGUILayout.IntField("Brush Density", brushDensity);
                 paintGroupName = EditorGUILayout.TextField("Paint Group Name", paintGroupName);
+                lockUp = GUILayout.Toggle(lockUp, "Lock Up Direction To Y");
             }
             EndFold();
 
@@ -383,12 +387,21 @@ namespace PrefabPainter
                 else MouseLocation = GameObject.Find(MouseLocationName).transform;
                 MouseLocation.rotation = mouseHitPoint.transform.rotation;
                 MouseLocation.forward = mouseHitPoint.normal;
-                Handles.ArrowHandleCap(3, mouseHitPoint.point, MouseLocation.rotation,
+
+                // Determine which direction the painting gizmo handle should face
+                Vector3 handleNormal = lockUp ? Vector3.up : mouseHitPoint.normal;
+                // Convert this vector normal to a quarternion rotation
+                Quaternion handleRotation = Quaternion.LookRotation(handleNormal);
+
+                // Draw the handle
+                Handles.ArrowHandleCap(3, mouseHitPoint.point, handleRotation,
                     gizmoNormalLength * brushSize, EventType.Repaint);
-                Handles.CircleHandleCap(2, currentMousePosition, MouseLocation.rotation, brushSize,
+                Handles.CircleHandleCap(2, currentMousePosition, handleRotation, brushSize,
                     EventType.Repaint);
                 Handles.color = innerColor;
-                Handles.DrawSolidDisc(currentMousePosition, mouseHitPoint.normal, brushSize);
+                Handles.DrawSolidDisc(currentMousePosition, handleNormal, brushSize);
+
+                // Remember the mouse normal
                 MouseLocation.up = mouseHitPoint.normal;
             }
 
@@ -536,7 +549,7 @@ namespace PrefabPainter
                 if (MouseLocation)
                 {
                     go.transform.rotation = MouseLocation.rotation;
-                    go.transform.up = MouseLocation.up;
+                    go.transform.up = lockUp ? Vector3.up : MouseLocation.up;
                 }
 
                 else go.transform.rotation = Quaternion.identity;
