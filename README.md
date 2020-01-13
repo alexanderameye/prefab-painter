@@ -43,6 +43,8 @@ After you've downloaded the files, you have 3 options to 'install' this tool.
 
 Make sure that the layer settings in the prefab painter are set up correctly!
 
+Important! The prefabs need colliders in order for the tool to work.
+
 ## Palettes
 Palettes are 'painting presets'. You can for example create a 'Trees' that contains 3 different types of trees.
 You can manage your palettes using the palette toolbar. You can use the 'Load' button to load a custom palette from your project folder, or you can create a new palette by clicking 'palettes > New Palette'. After you've edited a palette, don't forget to save it.
