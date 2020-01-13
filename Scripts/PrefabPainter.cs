@@ -551,7 +551,12 @@ namespace PrefabPainter
 
                 Vector2 scale = paintObjects[rndIndex].getSize();
                 if (scale != Vector2.one && scale != Vector2.zero)
-                    go.transform.localScale *= Random.Range(scale.x, scale.y);
+                {
+                    float randomScale = Random.Range(scale.x, scale.y);
+                     go.transform.localScale *= randomScale;
+                }
+                   
+
                 go.transform.position = pos;
                 DoubleRayCast(go, rndIndex);
                 if (go) AddObjectToGroup(go, rndIndex);
