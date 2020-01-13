@@ -70,7 +70,7 @@ namespace PrefabPainter
         void OnEnable()
         {
             listSize = 0;
-            SceneView.onSceneGUIDelegate += SceneGUI;
+            SceneView.duringSceneGui += SceneGUI;
             EditorApplication.hierarchyChanged += HierarchyChanged;
             if (paintObjects == null) paintObjects = new List<PaintObject>();
             layerNames = new List<string>();
@@ -87,7 +87,7 @@ namespace PrefabPainter
                 for (int x = 0; x < blueTexture.width; x++)
                 {
                     //rgb(0,191,255)
-                   // blueTexture.SetPixel(x, y, new Color(0.25f, 0.42f, 0.66f));
+                    // blueTexture.SetPixel(x, y, new Color(0.25f, 0.42f, 0.66f));
                     blueTexture.SetPixel(x, y, new Color(0f, 0.8f, 1f));
                     greyTexture.SetPixel(x, y, new Color(0.75f, 0.75f, 0.75f));
                 }
@@ -99,7 +99,7 @@ namespace PrefabPainter
 
         void OnDisable()
         {
-            SceneView.onSceneGUIDelegate -= SceneGUI;
+            SceneView.duringSceneGui -= SceneGUI;
             EditorApplication.hierarchyChanged -= HierarchyChanged;
             if (MouseLocation) DestroyImmediate(MouseLocation.gameObject);
             if (GameObject.Find(MouseLocationName) != null)
@@ -217,7 +217,7 @@ namespace PrefabPainter
                 {
                     for (int i = 0; i < palettes.Count; i++)
                     {
-                        if(palettes[i] != null) AddMenuItemForPalette(menu, palettes[i].name, palettes[i]);
+                        if (palettes[i] != null) AddMenuItemForPalette(menu, palettes[i].name, palettes[i]);
                     }
                 }
                 menu.AddItem(new GUIContent("New Palette"), creatingNewPalette, OnNewPaletteSelected);
@@ -268,12 +268,12 @@ namespace PrefabPainter
             listSize = palette.palette.Count;
             paintObjects = palette.palette;
             bool missingPrefabs = false;
-            for(int i = 0;i<listSize;i++)
+            for (int i = 0; i < listSize; i++)
             {
-                if(paintObjects[i].GetGameObject() == null) missingPrefabs = true;
+                if (paintObjects[i].GetGameObject() == null) missingPrefabs = true;
             }
 
-            if(missingPrefabs) Debug.Log("<color=cyan>[Prefab Painter] </color>One or more prefabs could not be loaded.");
+            if (missingPrefabs) Debug.Log("<color=cyan>[Prefab Painter] </color>One or more prefabs could not be loaded.");
         }
 
         void LoadEmptyPalette()
@@ -579,13 +579,15 @@ namespace PrefabPainter
             obj.SetActive(false);
             RaycastHit groundHit;
 
-            if (Physics.Raycast(position, -obj.transform.up, out groundHit))
+            if (Physics.Raycast(position, -obj.transform.up, out groundHit, Mathf.Infinity, paintMask))
             {
                 RaycastHit objectHit;
                 if (LayerContain(paintMask, groundHit.collider.gameObject.layer))
                 {
                     obj.SetActive(true);
-                    if (Physics.Raycast(groundHit.point, obj.transform.up, out objectHit) &&
+
+                    int objMask = 1 << obj.layer;
+                    if (Physics.Raycast(groundHit.point, obj.transform.up, out objectHit, Mathf.Infinity, objMask) &&
                         obj.layer == objectHit.collider.gameObject.layer)
                     {
                         Vector3 newPos;
@@ -644,7 +646,7 @@ namespace PrefabPainter
                 int rows = Mathf.FloorToInt(numberOfPrefabs / columns);
                 prefabListHeight = rows * 50f;
                 int posX = 5 + 50 * (i - (Mathf.FloorToInt(i / columns)) * columns);
-                int posY = y + 50 * Mathf.FloorToInt(i / columns);
+                int posY = y + 50 * Mathf.FloorToInt(i / columns) + 10;
 
                 Rect r = new Rect(posX, posY, 50, 50);
                 Rect border = new Rect(r.x + 2, r.y + 6, r.width - 4, r.height - 4);
@@ -656,7 +658,7 @@ namespace PrefabPainter
                 }
 
                 if (prefabs[i] == selectedPrefab && selectedPrefab != null) EditorGUI.DrawPreviewTexture(border, blueTexture, null, ScaleMode.ScaleToFit, 0f);
-                else EditorGUI.DrawPreviewTexture(border, greyTexture, null, ScaleMode.ScaleToFit, 0f);
+                else if (greyTexture != null) EditorGUI.DrawPreviewTexture(border, greyTexture, null, ScaleMode.ScaleToFit, 0f);
 
                 border.x += 2;
                 border.y += 2;
@@ -673,7 +675,7 @@ namespace PrefabPainter
 
             int c = Mathf.FloorToInt(windowWidth / (50 + 20) + 1);
             int xRect = 5 + 50 * (numberOfPrefabs - (Mathf.FloorToInt(numberOfPrefabs / c)) * c);
-            int yRect = y + 50 * Mathf.FloorToInt(numberOfPrefabs / c);
+            int yRect = y + 50 * Mathf.FloorToInt(numberOfPrefabs / c) + 10;
 
             DropAreaGUI(new Rect(xRect + 2, yRect + 6, 46, 46));
         }
