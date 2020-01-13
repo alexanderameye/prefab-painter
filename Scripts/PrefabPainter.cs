@@ -657,8 +657,11 @@ namespace PrefabPainter
                     Repaint();
                 }
 
-                if (prefabs[i] == selectedPrefab && selectedPrefab != null) EditorGUI.DrawPreviewTexture(border, blueTexture, null, ScaleMode.ScaleToFit, 0f);
-                else if (greyTexture != null) EditorGUI.DrawPreviewTexture(border, greyTexture, null, ScaleMode.ScaleToFit, 0f);
+                if (greyTexture != null)
+                {
+                    if (prefabs[i] == selectedPrefab && selectedPrefab != null) EditorGUI.DrawPreviewTexture(border, blueTexture, null, ScaleMode.ScaleToFit, 0f);
+                    else EditorGUI.DrawPreviewTexture(border, greyTexture, null, ScaleMode.ScaleToFit, 0f);
+                }
 
                 border.x += 2;
                 border.y += 2;
